@@ -1,16 +1,21 @@
-import Vue from 'vue'
-// import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 
-Vue.config.productionTip = false
-alert(typeof document);
-if (process.env.NODE_ENV === 'production') {
+setupVueConfig();
+if(process.env.NODE_ENV === 'production') setDeviceReadyListener();
+else initializeVue();
+
+// private functions
+function setupVueConfig() {
+  Vue.config.productionTip = false;
+}
+
+function setDeviceReadyListener() {
   document.addEventListener('deviceready', initializeVue.bind(this), false);
-} else {
-  initializeVue();
 }
 
 function initializeVue() {
   new Vue({
-    render: h => h('h1', 'The Vue Cordova App..'),
+    render: h => h(App),
   }).$mount('#app')
 }

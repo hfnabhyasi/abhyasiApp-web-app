@@ -6,6 +6,7 @@
     "serve-localhost": "vue-cli-service serve --host localhost",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:deploy": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

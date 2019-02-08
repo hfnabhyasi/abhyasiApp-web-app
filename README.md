@@ -17,6 +17,12 @@ npm run serve-localhost
 npm run build
 ```
 
+### Compiles and minifies for production
+```
+npm run build:deploy
+```
+## NOTE : ensure the corresponding Cordova app (named abhyasiApp) is located in the same folder as this project for this to build correctly.  Once the build is done we need to run `cordova run android` from the `abhyasiApp` project root.
+
 ### Run your tests
 ```
 npm run test

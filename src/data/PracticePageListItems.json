@@ -1,0 +1,18 @@
+{
+  "relaxation": {
+    "title": "Relaxation",
+    "link": "/practice/relaxation"
+  },
+  "meditation": {
+    "title": "Meditation",
+    "link": "/practice/meditation"
+  },
+  "cleaning": {
+    "title": "Cleaning",
+    "link": "/practice/cleaning"
+  },
+  "prayer": {
+    "title": "Prayer",
+    "link": "/practice/prayer"
+  }
+}

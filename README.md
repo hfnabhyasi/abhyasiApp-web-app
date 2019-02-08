@@ -1,5 +1,5 @@
 # web-app
-This is the web application for Cordova App : <TODO - update Github-path of Cordova project here.>
+This is the web application for [abhasyApp Cordova App|https://github.com/hfnabhyasi/abhyasiApp]
 
 ## Project setup
 ```

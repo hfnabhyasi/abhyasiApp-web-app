@@ -1,5 +1,5 @@
 # web-app
-This is the web application for [abhasyApp Cordova App|https://github.com/hfnabhyasi/abhyasiApp]
+This is the web application for [abhasyApp Cordova App](https://github.com/hfnabhyasi/abhyasiApp)
 
 ## Project setup
 ```

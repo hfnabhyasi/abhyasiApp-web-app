@@ -21,7 +21,7 @@
             <template v-else>
               <p>
                 <f7-icon f7="circle" size="16" color="blue"></f7-icon>
-                <span>&nbsp;{{ step }}</span>
+                <span style="margin-left:7px;">{{ step }}</span>
               </p>
             </template>
           </li>

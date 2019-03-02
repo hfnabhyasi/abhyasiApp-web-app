@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve-localhost": "vue-cli-service serve --host localhost",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "android": "cd ../abhyasiApp && cordova run browser",
     "build:deploy": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/",
-    "lint": "vue-cli-service lint"
+    "build:deploy:android": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/ && cd ../abhyasiApp && cordova run android",
+    "build:deploy:browser": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/ && cd ../abhyasiApp && cordova run browser",
+    "serve-localhost": "vue-cli-service serve --host localhost"
   },
   "dependencies": {
     "framework7": "^4.0.0",
     "framework7-icons": "^2.2.0",
     "framework7-vue": "^4.0.0",
-    "vue": "^2.5.21"
+    "vue": "^2.5.21",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",

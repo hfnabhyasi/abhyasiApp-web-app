@@ -17,6 +17,12 @@
       </span>
     </f7-navbar>
     <!-- Page content -->
+    <f7-card bg-color="blue" text-color="white">
+      <pre>
+          {{ $store.state }}
+      </pre>
+    </f7-card>
+
     <f7-card>
       <f7-list>
         <f7-list-item

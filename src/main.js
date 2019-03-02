@@ -20,13 +20,12 @@ function setupVueConfig() {
     Vue.config.productionTip = false;
 }
 
-function setDeviceReadyListener() {
-    document.addEventListener('deviceready', initializeVue.bind(this), false);
-    // document.addEventListener('deviceready', showMyFirstNotification.bind(this),
-    //   false);
-    // document.addEventListener('deviceready', showDevice.bind(this), false);
-    // document.addEventListener('deviceready', createAPersistentFile.bind(this), false);
-    document.addEventListener('deviceready', test.bind(this), false);
+function deviceReadyCallback() {
+  initializeVue();
+  set_deviceInfoOnStore();
+  // showMyFirstNotification();
+  // createAPersistentFile();
+  // test();
 }
 
 function writeFileToExternalDirectory() {
@@ -238,18 +237,8 @@ function writeFile(fileEntry, dataObj, isAppend) {
     });
 }
 
-function showDevice() {
-    // alert(`
-    //   ${device.cordova},
-    //   ${device.model},
-    //   ${device.platform},
-    //   ${device.uuid},
-    //   ${device.version},
-    //   ${device.manufacturer},
-    //   ${device.isVirtual},
-    //   ${device.serial}
-    //   `
-    // );
+function set_deviceInfoOnStore() {
+    store.commit('env/SET_CORDOVA_DEVICE_INFO', device);
 }
 
 function showMyFirstNotification() {

@@ -1,10 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+//
+import env from './env';
 import android from './android';
 
 const store = {
   modules:{
-    android
+    android,
+    env
   }
 }
 

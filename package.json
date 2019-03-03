@@ -6,11 +6,12 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "android": "cd ../abhyasiApp && cordova run browser",
+    "serve-localhost": "vue-cli-service serve --host localhost",
+    "android": "cd ../abhyasiApp && cordova run android",
+    "browser": "cd ../abhyasiApp && cordova run browser",
     "build:deploy": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/",
     "build:deploy:android": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/ && cd ../abhyasiApp && cordova run android",
-    "build:deploy:browser": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/ && cd ../abhyasiApp && cordova run browser",
-    "serve-localhost": "vue-cli-service serve --host localhost"
+    "build:deploy:browser": "rm -rf dist && npm run build --production && rm -rf ../abhyasiApp/www/* && cp -r dist/* ../abhyasiApp/www/ && cd ../abhyasiApp && cordova run browser"
   },
   "dependencies": {
     "framework7": "^4.0.0",

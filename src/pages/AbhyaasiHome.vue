@@ -17,7 +17,7 @@
       </span>
     </f7-navbar>
     <!-- Page content -->
-    <f7-card bg-color="blue" text-color="white">
+    <f7-card class="theme-dark">
       <pre>
           {{ $store.state }}
       </pre>
@@ -51,3 +51,10 @@
 <script>
 export default {};
 </script>
+
+<style media="screen">
+  .dev-card {
+    max-height: 300px;
+    overflow: auto;
+  }
+</style>

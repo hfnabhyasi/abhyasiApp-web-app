@@ -96,7 +96,7 @@ async function write_persistentFile(fileName, blob) {
         fileWriter.onwriteend = async evt => {
             const file = await promise_file(fileFS);
             const fileContent = await promise_fileContent(file);
-            alert(JSON.parse(fileContent.message));
+            alert(JSON.parse(fileContent).message);
         };
         fileWriter.write(blob);
     } catch (err) {
@@ -165,19 +165,11 @@ function promise_fileContent(file) {
         try {
             const reader = new FileReader();
             reader.onloadend = evt => {
-                alert(
-                    `reader-onloadend evt : ${JSON.stringify(evt)}`
-                )
                 const { target } = evt;
                 if(target._error) throw target._error;
                 else resolve(target.result);
             }
-            // reader.onerror = evt => alert(
-            //     `reader error evt : ${JSON.stringify(evt)}`);
-            alert('before reading file in promise_fileContent');
-            alert(`file reader: ${JSON.stringify(reader)}`)
             reader.readAsText(file);
-            // readFile(file);
         } catch (err) {
             alert(`promise_fileContent error : ${JSON.stringify(err)}`)
         }

@@ -3,11 +3,13 @@ import Vuex from 'vuex';
 //
 import env from './env';
 import android from './android';
+import persistentData from './persistentData';
 
 const store = {
   modules:{
     android,
-    env
+    env,
+    persistentData
   }
 }
 

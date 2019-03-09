@@ -17,10 +17,13 @@
       </span>
     </f7-navbar>
     <!-- Page content -->
-    <f7-card class="theme-dark">
-      <pre>
-          {{ $store.state }}
-      </pre>
+    <f7-card class="theme-dark dev-card">
+      <div class="pre-div">
+        <pre>
+            {{ $store.state }}
+        </pre>
+      </div>
+
     </f7-card>
 
     <f7-card>
@@ -53,8 +56,12 @@ export default {};
 </script>
 
 <style media="screen">
-  .dev-card {
+.pre-div {
+  width:100%;
+}
+.dev-card {
     max-height: 300px;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y:auto;
   }
 </style>

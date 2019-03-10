@@ -1,108 +1,40 @@
-<template>
-  <f7-page name="login">
-    <f7-navbar
-      :title="maximsData.maxims[maxim].properties.title"
-      back-link="Back"
-    />
-    <f7-sheet
-      class="demo-sheet"
-      :opened="sheetOpened"
-      @sheet:closed="sheetOpened = false"
-    >
-      <f7-toolbar>
-        <div class="left">
-          <span
-            style="padding-left:10px;"
-          >
-            <f7-toggle
-              value="reminderStatus"
-              color="blue"
-              @toggle:change="reminderToggled"
-            />
-          </span>
-        </div>
-        <div class="right">
-          <f7-link
-            sheet-close
-            @click="resetReminder()"
-          >
-            DONE
-          </f7-link>
-        </div>
-      </f7-toolbar>
+<template lang="pug">
+f7-page(name='login')
+  //- NAVBAR
+  f7-navbar(:title='maximsData.maxims[maxim].properties.title' back-link='Back')
+  //- SHEET FOR SETTING NOTIFICATIONS
+  f7-sheet.demo-sheet(:opened='sheetOpened' @sheet:closed='sheetOpened = false')
+    f7-toolbar
+        div.left
+          span(style='padding-left:10px;')
+            f7-toggle(value='reminderStatus' color='blue' @toggle:change='reminderToggled')
+        div.right
+          f7-link(sheet-close='' @click='resetReminder()') DONE
+    f7-page-content
+      f7-block
+        p Every {{ reminderHours }} hours for next {{ reminderDays }} day(s).
+        f7-list(inline-labels no-hairlines-md)
+          f7-list-input(label='Hours' type='select' default-value='2' :value='reminderHours' placeholder='Please choose...'  @input='reminderHours = $event.target.value')
+            f7-icon(slot='media' f7='calendar')
+            option(value='1')  1
+            option(value='2')  2
+            option(value='3')  3
 
-      <f7-page-content>
-        <f7-block>
-          <p>
-            Every {{ reminderHours }} hours for next {{ reminderDays }} day(s).
-            <f7-list
-              inline-labels
-              no-hairlines-md
-            >
-              <f7-list-input
-                label="Days"
-                type="select"
-                default-value="2"
-                :value="reminderDays"
-                placeholder="Please choose..."
-                @input="reminderDays = $event.target.value"
-              >
-                <f7-icon
-                  slot="media"
-                  icon="demo-list-icon"
-                />
-                <option value="1">
-                  1
-                </option> <option value="2">
-                  2
-                </option>
-                <option value="3">
-                  3
-                </option>
-              </f7-list-input>
-              <f7-list-input
-                label="Hours"
-                type="select"
-                default-value="2"
-                :value="reminderHours"
-                placeholder="Please choose..."
-                @input="reminderHours = $event.target.value"
-              >
-                <f7-icon
-                  slot="media"
-                  icon="demo-list-icon"
-                />
-                <option value="1">
-                  1
-                </option> <option value="2">
-                  2
-                </option>
-                <option value="3">
-                  3
-                </option>
-              </f7-list-input>
-            </f7-list>
-          </p>
-        </f7-block>
-      </f7-page-content>
-    </f7-sheet>
-
-    <f7-card v-if="maxim">
-      <div style="text-align:right; padding:10px; padding-bottom:0px;">
-        <f7-link @click="sheetOpened = true">
-          <f7-icon f7="bell_off" />
-        </f7-link>
-      </div>
-      <f7-block>
-        <h1>{{ maximsData.maxims[maxim].properties.title }}</h1>
-        <p>
-          <b>
-            <i> {{ maximsData.maxims[maxim].properties.content }} </i>
-          </b>
-        </p>
-      </f7-block>
-    </f7-card>
-  </f7-page>
+          f7-list-input(label='Days' type='select' default-value='2' :value='reminderDays' placeholder='Please choose...' @input='reminderDays = $event.target.value')
+            f7-icon(slot='media' f7='time')
+            option(value='1')  1
+            option(value='2')  2
+            option(value='3')  3
+  //- MAXIM CARD
+  f7-card(v-if='maxim')
+    div(style='text-align:right; padding:10px; padding-bottom:0px;')
+      f7-link(@click='sheetOpened = true')
+        f7-icon(f7='bell_off')
+    f7-block
+      h1 {{ maximsData.maxims[maxim].properties.title }}
+      p
+        b
+          i  {{ maximsData.maxims[maxim].properties.content }}
 </template>
 <script>
 import maximsData from "../data/10Maxims";

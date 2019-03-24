@@ -5,31 +5,67 @@ var savedFileEntry = {};
 var fileName = 'test-451.json';
 
 function createNewFileAndSetupData() {
-  promise_getPersistentDirectoryEntry()
-    .then(promise_fileEntry.bind(null, fileName, { create: true }))
-    .then(promise_fileWriter)
-    .then(edit_content)
-    .then(promise_writeContent)
-    .then(promise_getPersistentDirectoryEntry)
-    .then(promise_fileEntry.bind(null, fileName, { create: false }))
-    .then(promise_file)
-    .then(promise_fileContent)
-    .then(evt => store.commit('persistentData/SET_TEST_DATA_ON_STORE', JSON.parse(evt.target.result)))
-    .catch(err => alert(JSON.stringify(err)));
+    promise_getPersistentDirectoryEntry()
+        .then(promise_fileEntry.bind(null, fileName, { create: true }))
+        .then(promise_fileWriter)
+        .then(edit_content)
+        .then(promise_writeContent)
+        .then(promise_getPersistentDirectoryEntry)
+        .then(promise_fileEntry.bind(null, fileName, { create: false }))
+        .then(promise_file)
+        .then(promise_fileContent)
+        .then(evt => store.commit('persistentData/SET_TEST_DATA_ON_STORE', JSON.parse(evt.target.result)))
+        .catch(err => alert(JSON.stringify(err)));
 }
 
-export default function writePersistentFileData() {
+export function create_file_and_store_data(fileName, initialData) {
+    return new Promise((resolve, reject) => {
+        promise_getPersistentDirectoryEntry()
+            .then(promise_fileEntry.bind(null, fileName, { create: true }))
+            .then(promise_fileWriter)
+            .then(prepare_content.bind(null, initialData))
+            .then(promise_writeContent)
+            .then(promise_getPersistentDirectoryEntry)
+            .then(promise_fileEntry.bind(null, fileName, { create: false }))
+            .then(promise_file)
+            .then(promise_fileContent)
+            .then(resolve)
+            .catch(reject)
+    });
+}
+
+export function get_fileData(fileName) {
+    return new Promise((resolve, reject) => {
+        promise_getPersistentDirectoryEntry()
+            .then(promise_fileEntry.bind(null, fileName, { create: false }))
+            .then(promise_file)
+            .then(promise_fileContent)
+            .then(resolve)
+            .catch(reject)
+    });
+}
+
+export function is_persistentFileAvailable(fileName) {
+    return new Promise((resolve, reject) => {
+        promise_getPersistentDirectoryEntry()
+            .then(promise_fileEntry.bind(null, fileName, { create: false }))
+            .then(resolve)
+            .catch(reject);
+    });
+}
+
+export function writePersistentFileData() {
     promise_getPersistentDirectoryEntry()
         .then(promise_fileEntry.bind(null, fileName, { create: false }))
         .then((fileEntry) => {
-          const ERR_CODE = {
-            FILE_NOT_FOUND: 1
-          };
-          if(fileEntry.code == ERR_CODE.FILE_NOT_FOUND) {
-            createNewFileAndSetupData()
-          } else {
-            return fileEntry
-          }
+            const ERR_CODE = {
+                FILE_NOT_FOUND: 1
+            };
+            if(fileEntry.code == ERR_CODE.FILE_NOT_FOUND) {
+                createNewFileAndSetupData()
+            } else {
+                return fileEntry
+            }
         })
         // if file doesn't exist do
         .then(save_fileEntry)
@@ -142,6 +178,11 @@ function promise_writeContent(obj) {
             throw e;
         }
     });
+}
+
+function prepare_content(initialData, fileWriter) {
+    var content = new Blob([JSON.stringify(initialData, null, 2)], { type: 'application/json' });
+    return { data: content, fileWriter }
 }
 
 function edit_content(fileWriter) {

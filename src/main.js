@@ -10,7 +10,7 @@ import Vuex from 'vuex';
 import App from './App.vue';
 import store from './store/index.js';
 
-import writePersistentFileData from './api/File.js';
+import { is_persistentFileAvailable, get_fileData, create_file_and_store_data, writePersistentFileData } from './api/File.js';
 
 Framework7.use(Framework7Vue);
 setupVueConfig();
@@ -33,11 +33,29 @@ function setup_deviceReadyListener() {
     document.addEventListener('deviceready', cb_deviceReady, false);
 }
 
-function cb_deviceReady() {
+async function cb_deviceReady() {
     initialize_VueApp();
     set_cordova_deviceInfoOnStore();
     set_cordova_fileInfoOnStore();
-    writePersistentFileData();
+    // writePersistentFileData();
+    const fileName = 'test-452021.json'
+    const testFile = await is_persistentFileAvailable(fileName);
+    const initialData = {};
+
+    let fileData;
+
+    if(testFile.isFile) fileData = get_fileData(fileName);
+    else fileData = create_file_and_store_data(fileName, initialData);
+
+    // STORE file data on vuex store.
+    alert(JSON.stringify(fileData));
+
+    //
+    // is_persistentFileAvailable('test-451.json')
+    //     .then(function(res) {
+    //         alert(JSON.stringify(res))
+    //     })
+
     // showMyFirstNotification();
     // createAPersistentFile();
     // test();
